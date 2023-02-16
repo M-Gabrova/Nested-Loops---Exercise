@@ -1,65 +1,65 @@
-﻿using System;
+using System;
 
-namespace _06.CinemaTickets
+namespace ConsoleApp1
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            //string nameOfMovie = Console.ReadLine();
-            string input = Console.ReadLine();
+            string movieName = Console.ReadLine();
+            int studentTickets = 0;
+            int standardTickets = 0;
+            int kidTickets = 0;
+            //string ticketType;
 
-            int studentCounter = 0;
-            int standardCounter = 0;
-            int kidCounter = 0;
-
-            while (input != "Finish")
+            while (movieName != "Finish")
             {
-                string nameOfMovie = Console.ReadLine();
-                int freePlaces = int.Parse(Console.ReadLine());
-                int counter = 0;
+                int capacity = int.Parse(Console.ReadLine());
+                int seatsTaken = 0;
 
-                while (freePlaces > counter)
+                while (seatsTaken < capacity)
                 {
-                    string typeOfTicket = input;
-                    typeOfTicket= Console.ReadLine();
+                    string ticketType = Console.ReadLine();
 
-                    if (typeOfTicket == "End")
+                    if (ticketType == "End")
                     {
                         break;
                     }
 
-                    if (typeOfTicket == "student")
+                    if (ticketType == "student")
                     {
-                        studentCounter++;
+                        studentTickets++;
                     }
-                    else if (typeOfTicket == "standard")
+                    else if (ticketType == "standard")
                     {
-                        standardCounter++;
+                        standardTickets++;
                     }
-                    else if (typeOfTicket == "kid")
+                    else
                     {
-                        kidCounter++;
+                        kidTickets++;
                     }
 
-                    counter++;
+                    seatsTaken++;
+              
                 }
+                double percentFull = (double)seatsTaken / capacity * 100;
+                Console.WriteLine($"{movieName} - {percentFull:F2}% full.");
+                
+                movieName = Console.ReadLine();
 
-                double averagePlaces = counter * 100.0 / freePlaces;
-                Console.WriteLine($"{nameOfMovie} - {averagePlaces:F2}% full.");
-
-                nameOfMovie = Console.ReadLine();
             }
 
-            int allTickets = studentCounter + standardCounter + kidCounter;
-            double percentStudendTickets = (double)studentCounter / allTickets * 100;
-            double percentStandardTickets = (double)standardCounter / allTickets * 100;
-            double precentKidTickets = (double)kidCounter / allTickets * 100;
 
-            Console.WriteLine($"Total tickets: {allTickets}");
-            Console.WriteLine($"{percentStudendTickets:F2}% student tickets.");
-            Console.WriteLine($"{percentStandardTickets:F2}% standard tickets.");
-            Console.WriteLine($"{precentKidTickets:F2}% kids tickets.");
+            int totalTickets = studentTickets + standardTickets + kidTickets;
+            Console.WriteLine($"Total tickets: {totalTickets}");
+
+            double studentPercent = (double)studentTickets / totalTickets * 100;
+            double standardPercent = (double)standardTickets / totalTickets * 100;
+            double kidPercent = (double)kidTickets / totalTickets * 100;
+            Console.WriteLine($"{studentPercent:F2}% student tickets.");
+            Console.WriteLine($"{standardPercent:F2}% standard tickets.");
+            Console.WriteLine($"{kidPercent:F2}% kids tickets.");
         }
     }
+
 }
